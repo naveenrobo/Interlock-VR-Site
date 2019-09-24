@@ -46,10 +46,17 @@
 }
 
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
 }
 
+
+.highlight {
+    background-color: yellow;
+    color: #0e2965;
+}
 
 * {
     box-sizing: border-box;
@@ -312,7 +319,6 @@ body {
 .landing-left {
     background-color: #000;
 }
-
 
 .landing-content {
     position: absolute;
