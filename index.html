@@ -118,7 +118,7 @@
             <img src="https://assets.website-files.com/5cfbc938982a74a06bedeb1a/5d276e1d2836ca6ab6ce3039_icon-Social-FB.png"
                 width="22" alt="" class="icon-social">
         </a>
-        <a href="https://drive.google.com/" target="_blank" class="link---social w-inline-block">
+        <a href="https://instagram.com/" target="_blank" class="link---social w-inline-block">
             <img src="https://assets.website-files.com/5cfbc938982a74a06bedeb1a/5d276e26dd9c318259677655_icon-Social-IG.png"
                 width="22" alt="" class="image-2">
         </a>
@@ -256,7 +256,7 @@
 
     </section>
 
-    
+
 
     <section class="contact">
         <div class="contact-content">
@@ -264,16 +264,19 @@
                 <p>Let us know what you think</p>
             </div>
             <div class="contact-form">
-                <form class="form-text" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                    <input class="input-field" type="text" name="name" placeholder="Name" autocomplete="off" value="">
-                    <input class="input-field" type="email" name="name" placeholder="Email" autocomplete="off" value="">
-                    <textarea name="details" id="" cols="4" rows="4" class="input-field textarea"
+                <form class="form-text" data-aos="fade-up" data-aos-anchor-placement="top-bottom"
+                    onsubmit="event.preventDefault();submitform()">
+                    <input class="input-field" type="text" id="name-field" name="name" placeholder="Name"
+                        autocomplete="off" value="" required />
+                    <input class="input-field" type="email" id="email-field" name="name" placeholder="Email"
+                        autocomplete="off" value="" required />
+                    <textarea class="input-field textarea" id="desc-field" name="description" cols="4" rows="4"
                         placeholder="How can we help you"></textarea>
-                    <button class="btn btn-primary fill">
+                    <button class="btn btn-primary fill" type="submit">
                         Submit
                     </button>
                 </form>
-
+                <p id="submit-message" class="submit-message"></p>
             </div>
         </div>
     </section>
@@ -319,6 +322,45 @@
                 .getElementById(
                     "scroll").classList.add("hide")
         };
+
+        async function submitform() {
+            try {
+                const data = await postData('https://nv1cv80gfc.execute-api.us-east-2.amazonaws.com/prod/mail', {
+                    name: document.getElementById("name-field").value,
+                    email: document.getElementById("email-field").value,
+                    description: document.getElementById("desc-field").value
+                });
+                document.getElementById("submit-message").innerText = data.message;
+                if (data.status) {
+                    clearForm();
+                }
+                console.log(JSON.stringify(data));
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function clearForm() {
+            document.getElementById("name-field").value = '';
+            document.getElementById("email-field").value = '';
+            document.getElementById("desc-field").value = '';
+        }
+
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrer: 'no-referrer',
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        }
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

@@ -173,3 +173,9 @@ form {
         width: 80%
     }
 }
+
+.submit-message {
+    color: #ffee00;
+    font-size: 25px;
+    padding-top: 20px;
+}
