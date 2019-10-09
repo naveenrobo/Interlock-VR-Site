@@ -105,6 +105,10 @@ form {
     font-weight: 400;
 }
 
+label {
+    display: none;
+}
+
 @media (max-width: 768.98px) {
     .contact-content {
         padding: 0 60px;
