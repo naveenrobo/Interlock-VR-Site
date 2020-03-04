@@ -759,14 +759,14 @@ input:focus {
 
 .flex-split {
   width: 100%;
-  min-height: 500px;
+  height: 500px;
   display: flex;
   flex-direction: column;
 }
 
 @media (max-width: 971.98px) {
   .flex-split {
-    min-height: 380px;
+    height: 380px;
   }
 }
 
@@ -2032,4 +2032,8 @@ input:focus {
   fill: #3c3c3b;
   visibility: visible;
   cursor: pointer;
+}
+
+video {
+  height: 100%;
 }
